@@ -29,6 +29,8 @@ public:
 	}
 };
 
+
+
 int main() {
 //    vector<int> students = {0, 1, 2, 2, 3, 0, 4, 2};
     vector<int> students = {2,3,2};
