@@ -11,36 +11,36 @@ public:
 	static int start(vector<int>& arr, int n, int key) {
 		// int n = arr.size();
 		int low = 0, high = n - 1;
-		int ans = n;
+		int start = -1;
 		while (low <= high) {
 			int mid = (low + high) / 2;
 			if (arr[mid] >= key) {
 				if (mid >= n) {
-					ans = mid;
+					start = mid;
 				}
-				ans = mid;
+				start = mid;
 				high = mid - 1;
 			} else {
 				low = mid + 1;
 			}
 		}
 
-		return ans;
+		return start;
 	}
 	static int end(vector<int>& arr, int n, int key) {
 		int low = 0, high = n - 1;
-		int ans = n;
+		int end = -1;
 		while (low <= high) {
 			int mid = (low + high) / 2;
 			if (arr[mid] > key) {
-				ans = mid;
+				end = mid;
 				high = mid - 1;
 			} else {
 				low = mid + 1;
 			}
 		}
 
-		return ans;
+		return end;
 	}
 
 	static vector<int> searchRange(vector<int> &v, int key) {
@@ -107,5 +107,6 @@ int main() {
 	vector<int> index2 = Solution_Two::searchRange(arr, target);
 	cout << "Range of " << target << " is [" << index[0]<< ", " << index[1] << "]" << endl;
 	cout << endl<<"Range of " << target << " is [" << index2[0] << ", " << index2[1]<< "]" << endl;
+	cout << endl<<"Occurrence of number "<<target<<" is:-"<<index[1]-index[0]+1;
 	return 0;
 }
