@@ -45,7 +45,7 @@ public:
 
 int main(){
 	vector<int> arr = {7,8,9,1,2,2,3,4,5,6};
-	int target = ;
+	int target =5 ;
 	bool val =  Solution::search(arr,target);
 	cout<<val<<endl;
 }
