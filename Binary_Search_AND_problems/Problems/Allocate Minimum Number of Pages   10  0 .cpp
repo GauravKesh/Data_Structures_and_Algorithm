@@ -12,6 +12,7 @@ public:
 	static int countStudents(vector<int> &arr, int pages) {
 		int n = arr.size(); //size of array.
 		int students = 1;
+		int ans =2;
 		long long pagesStudent = 0;
 		for (int i = 0; i < n; i++) {
 			if (pagesStudent + arr[i] <= pages) {
@@ -38,6 +39,7 @@ public:
 			if (students > m) {
 				low = mid + 1;
 			} else {
+
 				high = mid - 1;
 			}
 		}
