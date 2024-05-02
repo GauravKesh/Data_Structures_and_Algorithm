@@ -3,8 +3,6 @@
 //
 
 
-
-
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -32,6 +30,6 @@ int main()
 {
 	vector<int> matrix = {-1,2,-3,3};
 	int n = 3, m = 3;
-	cout << "Maximum number in te array:- " <<
+	cout << "Maximum number in thee array:- " <<
 		 Solution::findMaxK(matrix) << '\n';
 }
