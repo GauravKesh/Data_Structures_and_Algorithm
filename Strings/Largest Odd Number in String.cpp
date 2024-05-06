@@ -9,33 +9,14 @@ using namespace std;
 
 class Solution {
 public:
-	string largestOddNumber(string& num) {
-		// to check string is empty !!
-		if (num.empty())
-			return num;
-		string nu = num;
-		int k = stoi(nu);  /// string to int ....
-		// to check the number is odd !!
-		if (k % 2 != 0)
-			return num;
-		if(k==0){
-			return "";
+	string largestOddNumber(string num) {
+		int end = num.size() - 1;
+		while (end >= 0 && !(num[end] & 1)) {
+			end--;
 		}
-		int od;
-		// checking each  digit of number to be odd if given digit is a even.....
-		while (k != 0) {
-			int m = k % 10; // to get each digit....
-//			cout<<endl<<m<<endl;
-			k = k / 10;     // to remove last element...
-			if (m!=0 && m % 2 !=0 ) {
-				od = max(od, m);
-			}
-		}
-		return to_string(od);
+		return num.substr(0, end + 1);
 	}
 };
-
-
 
 
 int main() {
