@@ -13,6 +13,7 @@ public:
 		int end = num.size() - 1;
 		while (end >= 0 && !(num[end] & 1)) {
 			end--;
+			int k;
 		}
 		return num.substr(0, end + 1);
 	}
