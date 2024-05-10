@@ -5,8 +5,18 @@
 #include<string>
 
 using namespace std;
-
-class Solution {
+class Solution1 {
+public:
+	static bool rotateString(string s, string goal) {
+		for(int i = 0; i < s.size(); i++){
+			reverse(s.begin()+1,s.end());
+			reverse(s.begin(), s.end());
+			if(s==goal) return true;
+		}
+		return false;
+	}
+};
+class Solution2 {
 public:
 	static bool rotateString(string s, string goal) {
 		int j = 0;
@@ -30,6 +40,6 @@ public:
 int main() {
 	string s = "abcde";
 	string goal = "cdeab";
-	bool k = Solution::rotateString(s, goal);
+	bool k = Solution1::rotateString(s, goal);
 	cout << k;
 }
