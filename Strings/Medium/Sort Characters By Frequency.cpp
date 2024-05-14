@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+
 
 using namespace std;
 
@@ -13,14 +15,18 @@ using namespace std;
 class Solution {
 public:
 	static string frequencySort(string s) {
-		sort(s.begin(),s.end());
-		return s;
+		vector<int> str1 (26,0);
+		vector<int> str2 (26,0);
+		for(int i =0;i<n;i++){
+
+		}
+
 	}
 };
 
 
 int main(){
-	string  s= "AAbbbb";
+	string  s= "cCKAAbbbb";
 	string k = Solution::frequencySort(s);
 			cout<<k;
 }
