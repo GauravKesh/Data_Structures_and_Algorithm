@@ -9,7 +9,7 @@
 
 using namespace std;
 
-
+int k;
 
 
 class Solution {
