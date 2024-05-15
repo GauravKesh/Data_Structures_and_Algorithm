@@ -13,34 +13,44 @@ using namespace std;
 
 class Solution {
 public:
-	static string frequencySort(string s) {
-		std::unordered_map<char,int> frq;
-		for(char c:s){
+	static string
+	frequencySort(string s) {
+		std::unordered_map<char, int> frq;
+		for (char c: s) {
 			frq[c]++;
 		}
 		// unordered map converted to a vector...
-		std::vector<std::pair<char ,int>> sorted_chars(frq.begin(),frq.end());
+		std::vector<std::pair<char, int>> sorted_chars(
+				frq.begin(),
+				frq.end());
 		// to sort frequency in descending order...
 		// used lambda function ...
-		std::sort(sorted_chars.begin(),sorted_chars.end(), [](const std::pair<char, int>& a, const std::pair<char, int>& b){
-			return a.second>b.second;
-		});
-		std:: string result;
-		for(const auto& p: sorted_chars ){
-			result.append(p.second,p.first);
+		std::sort(
+				sorted_chars.begin(),
+				sorted_chars.end(),
+				[](const std::pair<char, int> &a,
+				   const std::pair<char, int> &b) {
+					return a.second >
+						   b.second;
+				});
+		std::string result;
+		for (const auto &p: sorted_chars) {
+			result.append(
+					p.second,
+					p.first);
 		}
 		return result;
-
 
 
 	}
 };
 
 
-int main(){
-	std::string  s= "cCKAAbbbb";
-	std::string k = Solution::frequencySort(s);
-			std::cout<<k;
+int main() {
+	std::string s = "cCKAAbbbb";
+	std::string k = Solution::frequencySort(
+			s);
+	std::cout << k;
 }
 
 
@@ -70,7 +80,9 @@ std::sort(sorted_chars.begin(), sorted_chars.end(), [](const std::pair<char, int
     return a.second > b.second;
 });
 std::sort(sorted_chars.begin(), sorted_chars.end(), ...); calls the sort function on the vector.
-The lambda function [](const std::pair<char, int>& a, const std::pair<char, int>& b) { return a.second > b.second; } compares two pairs a and b and returns true if a should come before b (i.e., if a's frequency is greater than b's frequency).
+		The lambda function [](const std::pair<char, int>& a, const std::pair<char, int>& b) { return a.second > b.second; }
+ 		compares two pairs a and b and returns true if a should come before b (i.e., if a's frequency is greater than b's frequency).
+
 Constructing the Result String:
 
 We iterate over the sorted vector and build the result string by repeating each character according to its frequency.

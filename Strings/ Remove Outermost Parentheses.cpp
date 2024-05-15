@@ -31,7 +31,6 @@ public:
 
 int main() {
 	string s = "(()())(())";
-	int n = 3, m = 3;
 	cout <<Solution::removeOuterParentheses(s) << '\n';
 }
 
