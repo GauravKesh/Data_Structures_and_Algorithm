@@ -8,6 +8,24 @@
 
 class Solution {
 public:
+	static int maxDepth(std::string s) {
+		int res = 0;
+		int count =0;
+		for(int i=0;i<s.length();i++){
+			if(s[i] == '('){
+				count++;
+			}
+			else if(s[i] == ')'){
+				count--;
+			}
+			res = std::max(res,count);
+		}
+
+		return res;
+	}
+};
+class Solution1 {
+public:
 	static int maxDepth(std::string &s) {
 		if(s.empty()) return 0;
 		int ans=0, p=0;
@@ -24,7 +42,10 @@ int main() {
 	std::string s = "(1+(2*3)+((8)/4))+1";
 	int n = Solution::maxDepth(
 			s);
-	std::cout << n;
+	int n1 = Solution1::maxDepth(
+			s);
+	std::cout << n<<std::endl;
+	std::cout << n1;
 
 }
 
