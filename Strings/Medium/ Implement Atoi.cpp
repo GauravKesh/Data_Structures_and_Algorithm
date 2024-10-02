@@ -17,7 +17,7 @@ int main() {
 
 	int n = Solution::romanToInt(
 			s2);
-	int n1 = SolutionOptimal::romanToInt(
-			s2);
+//	int n1 = SolutionOptimal::romanToInt(
+//			s2);
 	std::cout << n<<std::endl;
-	std::cout << n1<<std::endl;
+//	std::cout << n1<<std::endl;
