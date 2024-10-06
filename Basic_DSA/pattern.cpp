@@ -15,8 +15,6 @@ void pattern2(int n) {
             cout << "*";
         cout << "\n";
     }
-
-
 }
 void pattern3(int n) {
     for (int i = 1; i <= n + 1; i++) {
