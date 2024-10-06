@@ -9,47 +9,39 @@ public:
 	Node *next;
 	Node *prev;
 
-	explicit Node(int data1, Node *next1, Node *prev1) {
+	explicit Node(int data1, Node *next1 = nullptr, Node *prev1 = nullptr) {
 		data = data1;
 		next = next1;
 		prev = prev1;
 	}
-
-	explicit Node(int data1) {
-		data = data1;
-		next = nullptr;
-		prev = nullptr;
-	}
 };
 
 Node *arrayToDoublyLinkedList(vector<int> &arr) {
+	if (arr.empty()) return nullptr;
+
 	Node *head = new Node(arr[0]);
 	Node *mov = head;
 	int n = arr.size();
 	for (int i = 1; i < n; i++) {
 		Node *newNode = new Node(arr[i], nullptr, mov);
-		mov->next = newNode; // Link current node to new node
+		mov->next = newNode;
 		mov = newNode;
 	}
 	return head;
 }
 
 void displayAllElementOfDLL(Node *head) {
+	if (head == nullptr) {
+		cout << "The list is empty!" << endl;
+		return;
+	}
 	Node *mov = head;
-	cout << "All the elements of the DLL are :- ";
+	cout << "Elements of the DLL: ";
 	while (mov != nullptr) {
 		cout << mov->data << " ";
 		mov = mov->next;
 	}
 	cout << endl;
-}
-
-void getTailOfDLL(Node *head) {
-	Node *mov = head;
-	while (mov->next != nullptr) {
-		mov = mov->next;
-	}
-	cout << "Tail of the DLL is: " << mov->data << endl;
 }
 
 int sizeOfDLL(Node *head) {
@@ -64,27 +56,27 @@ int sizeOfDLL(Node *head) {
 
 Node *deleteHead(Node *head) {
 	if (head == nullptr) {
-		cout << "DLL is empty" << endl;
+		cout << "The list is empty, nothing to delete!" << endl;
 		return nullptr;
 	}
-	Node *temp = head; // Store the old head
-	head = head->next; // Move the head to the next node
+	Node *temp = head;
+	head = head->next;
 	if (head != nullptr) {
-		head->prev = nullptr; // Set the new head's prev pointer to nullptr
+		head->prev = nullptr;
 	}
-	delete temp; // Free the memory of the old head
+	delete temp;
 	return head;
 }
 
 Node *deleteTail(Node *head) {
-	Node *temp = head;
 	if (head == nullptr) {
-		cout << "DLL is empty" << endl;
+		cout << "The list is empty, nothing to delete!" << endl;
 		return nullptr;
 	}
-	if (head->next == nullptr) { // If there's only one node in the list
+	if (head->next == nullptr) {
 		return deleteHead(head);
 	}
+	Node *temp = head;
 	while (temp->next != nullptr) {
 		temp = temp->next;
 	}
@@ -95,61 +87,105 @@ Node *deleteTail(Node *head) {
 
 Node *deleteElementAtGivenPosition(Node *head, int pos) {
 	if (head == nullptr) {
-		cout << "DLL is empty" << endl;
+		cout << "The list is empty, nothing to delete!" << endl;
 		return nullptr;
+	}
+
+	if (pos <= 0 || pos > sizeOfDLL(head)) {
+		cout << "Invalid position!" << endl;
+		return head;
+	}
+
+	if (pos == 1) {
+		return deleteHead(head);
 	}
 
 	Node *temp = head;
 	int tracker = 1;
-	while (temp != nullptr && tracker < pos) {
+	while (tracker < pos) {
 		temp = temp->next;
 		tracker++;
 	}
 
-	if (temp == nullptr) {
-		cout << "Position out of bounds" << endl;
-		return head;
+	if (temp->next != nullptr) {
+		temp->next->prev = temp->prev;
 	}
-
-	if (temp == head) {
-		head = head->next;  // Update head to the next node
-		if (head != nullptr) {
-			head->prev = nullptr;
-		}
-	} else {
-		if (temp->prev != nullptr) {
-			temp->prev->next = temp->next;
-		}
-		if (temp->next != nullptr) {
-			temp->next->prev = temp->prev;
-		}
+	if (temp->prev != nullptr) {
+		temp->prev->next = temp->next;
 	}
-
 	delete temp;
 	return head;
 }
 
 int main() {
-	vector<int> arr = {1, 2, 3, 4, 5, 6, 7};
-	Node *head = arrayToDoublyLinkedList(arr);
+	Node *head = nullptr;
+	vector<int> arr;
+	int choice, num, pos;
 
-	cout << "Head of the DLL is: " << head->data << endl;
-	cout << "Size of the DLL is: " << sizeOfDLL(head) << endl;
-	getTailOfDLL(head);
-	displayAllElementOfDLL(head);
+	cout << "Welcome to the Interactive Doubly Linked List program!" << endl;
 
-	cout << endl << "Delete head function was called:- " << endl;
-	head = deleteHead(head);
-	displayAllElementOfDLL(head);
+	while (true) {
+		cout << "\nChoose an operation:" << endl;
+		cout << "1. Create a new doubly linked list from an array" << endl;
+		cout << "2. Display the elements of the doubly linked list" << endl;
+		cout << "3. Delete the head of the list" << endl;
+		cout << "4. Delete the tail of the list" << endl;
+		cout << "5. Delete an element at a specific position" << endl;
+		cout << "6. Get the size of the list" << endl;
+		cout << "7. Exit" << endl;
 
-	cout << endl << "Delete tail function was called:- " << endl;
-	head = deleteTail(head);
-	displayAllElementOfDLL(head);
+		cout << "Enter your choice (1-7): ";
+		cin >> choice;
 
-	int pos = 3;
-	cout << endl << "Delete element at position " << pos << " was called:- " << endl;
-	head = deleteElementAtGivenPosition(head, pos);
-	displayAllElementOfDLL(head);
+		switch (choice) {
+			case 1:
+				arr.clear();
+				cout << "Enter the number of elements: ";
+				cin >> num;
+				cout << "Enter the elements:" << endl;
+				for (int i = 0; i < num; i++) {
+					int element;
+					cin >> element;
+					arr.push_back(element);
+				}
+				head = arrayToDoublyLinkedList(arr);
+				cout << "Doubly linked list created!" << endl;
+				break;
+
+			case 2:
+				displayAllElementOfDLL(head);
+				break;
+
+			case 3:
+				head = deleteHead(head);
+				cout << "Head deleted!" << endl;
+				break;
+
+			case 4:
+				head = deleteTail(head);
+				cout << "Tail deleted!" << endl;
+				break;
+
+			case 5:
+				cout << "Enter the position to delete (starting from 1): ";
+				cin >> pos;
+				head = deleteElementAtGivenPosition(head, pos);
+				cout << "Element at position " << pos << " deleted!" << endl;
+				break;
+
+			case 6:
+				cout << "The size of the list is: " << sizeOfDLL(head) << endl;
+				break;
+
+			case 7:
+				cout << "Exiting program..." << endl;
+				return 0;
+
+			default:
+				cout << "Invalid choice! Please enter a number between 1 and 7." << endl;
+				break;
+		}
+	}
 
 	return 0;
 }
