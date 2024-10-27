@@ -39,8 +39,6 @@ void bubble_sort(int arr[], int as) {
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
                 didSwap++;
-
-
             }
         }
         if (didSwap == 0) {

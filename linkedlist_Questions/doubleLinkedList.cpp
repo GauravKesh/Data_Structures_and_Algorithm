@@ -3,39 +3,39 @@
 
 using namespace std;
 
-class Node {
+class DLLNode {
 public:
 	int data;
-	Node *next;
-	Node *prev;
+	DLLNode *next;
+	DLLNode *prev;
 
-	explicit Node(int data1, Node *next1 = nullptr, Node *prev1 = nullptr) {
+	explicit DLLNode(int data1, DLLNode *next1 = nullptr, DLLNode *prev1 = nullptr) {
 		data = data1;
 		next = next1;
 		prev = prev1;
 	}
 };
 
-Node *arrayToDoublyLinkedList(vector<int> &arr) {
+DLLNode *arrayToDoublyLinkedList(vector<int> &arr) {
 	if (arr.empty()) return nullptr;
 
-	Node *head = new Node(arr[0]);
-	Node *mov = head;
+	DLLNode *head = new DLLNode(arr[0]);
+	DLLNode *mov = head;
 	int n = arr.size();
 	for (int i = 1; i < n; i++) {
-		Node *newNode = new Node(arr[i], nullptr, mov);
-		mov->next = newNode;
-		mov = newNode;
+		DLLNode *newDLLNode = new DLLNode(arr[i], nullptr, mov);
+		mov->next = newDLLNode;
+		mov = newDLLNode;
 	}
 	return head;
 }
 
-void displayAllElementOfDLL(Node *head) {
+void displayAllElementOfDLL(DLLNode *head) {
 	if (head == nullptr) {
 		cout << "The list is empty!" << endl;
 		return;
 	}
-	Node *mov = head;
+	DLLNode *mov = head;
 	cout << "Elements of the DLL: ";
 	while (mov != nullptr) {
 		cout << mov->data << " ";
@@ -44,8 +44,8 @@ void displayAllElementOfDLL(Node *head) {
 	cout << endl;
 }
 
-int sizeOfDLL(Node *head) {
-	Node *mov = head;
+int sizeOfDLL(DLLNode *head) {
+	DLLNode *mov = head;
 	int count = 0;
 	while (mov != nullptr) {
 		count++;
@@ -54,12 +54,28 @@ int sizeOfDLL(Node *head) {
 	return count;
 }
 
-Node *deleteHead(Node *head) {
+
+DLLNode *reverseADLL(DLLNode *head){
+	DLLNode *temp = head;
+	DLLNode *mov = temp;
+	while(mov->next !=nullptr){
+		DLLNode *prev = mov->prev;
+		mov->prev = mov->next;
+		mov->next = prev;
+		mov = mov->prev;
+	}
+	mov->next = mov->prev;
+	mov->prev = nullptr;
+	head = mov;
+	return head;
+}
+
+DLLNode *deleteHead(DLLNode *head) {
 	if (head == nullptr) {
 		cout << "The list is empty, nothing to delete!" << endl;
 		return nullptr;
 	}
-	Node *temp = head;
+	DLLNode *temp = head;
 	head = head->next;
 	if (head != nullptr) {
 		head->prev = nullptr;
@@ -68,7 +84,7 @@ Node *deleteHead(Node *head) {
 	return head;
 }
 
-Node *deleteTail(Node *head) {
+DLLNode *deleteTail(DLLNode *head) {
 	if (head == nullptr) {
 		cout << "The list is empty, nothing to delete!" << endl;
 		return nullptr;
@@ -76,7 +92,7 @@ Node *deleteTail(Node *head) {
 	if (head->next == nullptr) {
 		return deleteHead(head);
 	}
-	Node *temp = head;
+	DLLNode *temp = head;
 	while (temp->next != nullptr) {
 		temp = temp->next;
 	}
@@ -85,7 +101,7 @@ Node *deleteTail(Node *head) {
 	return head;
 }
 
-Node *deleteElementAtGivenPosition(Node *head, int pos) {
+DLLNode *deleteElementAtGivenPosition(DLLNode *head, int pos) {
 	if (head == nullptr) {
 		cout << "The list is empty, nothing to delete!" << endl;
 		return nullptr;
@@ -100,7 +116,7 @@ Node *deleteElementAtGivenPosition(Node *head, int pos) {
 		return deleteHead(head);
 	}
 
-	Node *temp = head;
+	DLLNode *temp = head;
 	int tracker = 1;
 	while (tracker < pos) {
 		temp = temp->next;
@@ -118,7 +134,7 @@ Node *deleteElementAtGivenPosition(Node *head, int pos) {
 }
 
 int main() {
-	Node *head = nullptr;
+	DLLNode *head = nullptr;
 	vector<int> arr;
 	int choice, num, pos;
 
@@ -132,9 +148,10 @@ int main() {
 		cout << "4. Delete the tail of the list" << endl;
 		cout << "5. Delete an element at a specific position" << endl;
 		cout << "6. Get the size of the list" << endl;
-		cout << "7. Exit" << endl;
+		cout << "7. Reverse the List" << endl;
+		cout << "8. Exit" << endl;
 
-		cout << "Enter your choice (1-7): ";
+		cout << "Enter your choice (1-8): ";
 		cin >> choice;
 
 		switch (choice) {
@@ -176,8 +193,13 @@ int main() {
 			case 6:
 				cout << "The size of the list is: " << sizeOfDLL(head) << endl;
 				break;
-
 			case 7:
+				cout << "Reversed Double Linked List is:-  ";
+				head = reverseADLL(head);
+				displayAllElementOfDLL(head);
+				break;
+
+			case 8:
 				cout << "Exiting program..." << endl;
 				return 0;
 
