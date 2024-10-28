@@ -11,6 +11,7 @@ public:
 			if (n >= i) {
 				cnt++;
 				n -= i;
+//				k
 			}
 		}
 		return cnt;

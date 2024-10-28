@@ -30,7 +30,7 @@ public:
 				 << "count:-"
 				 << cnt
 				 << endl;
-
+//	k
 		}
 		if (cnt > 1) {
 			return true;
