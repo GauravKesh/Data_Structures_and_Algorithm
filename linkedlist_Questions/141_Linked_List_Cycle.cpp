@@ -14,16 +14,22 @@
  */
 class Solution {
 public:
-	bool hasCycle(ListNode *head) {
-		if(head==NULL || head->next==NULL){
+	bool
+	hasCycle(ListNode *head) {
+		if (head == NULL ||
+			head->next ==
+			NULL) {
 			return false;
 		}
-		ListNode* slow = head;
-		ListNode* fast = head;
-		while(fast!=NULL && fast->next!=NULL){
+		ListNode *slow = head;
+		ListNode *fast = head;
+		while (fast != NULL &&
+			   fast->next !=
+			   NULL) {
 			slow = slow->next;
 			fast = fast->next->next;
-			if(slow==fast){
+			if (slow ==
+				fast) {
 				return true;
 			}
 		}
@@ -31,3 +37,23 @@ public:
 	}
 };
 
+bool has_cycle(
+		SinglyLinkedListNode *head) {
+	if (head == NULL ||
+		head->next == NULL) {
+		return false;
+	}
+	SinglyLinkedListNode *slow = head;
+	SinglyLinkedListNode *fast = head;
+	while (fast != NULL &&
+		   fast->next !=
+		   NULL) {
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast) {
+			return true;
+		}
+	}
+	return false;
+
+}
