@@ -15,7 +15,7 @@ public:
 
 		int n = s.size();
 		for (int i = 0; i < n; i++) {
-			if (s[i] == '(' || s[i] == '{' || s[i] == '[') {  // Fix: '[' instead of ']'
+			if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
 				stk.push(s[i]);
 			} else {
 				if (stk.empty()) {
