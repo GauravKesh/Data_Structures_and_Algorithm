@@ -17,12 +17,10 @@ public:
 			}
 			stk.push(num);
 		}
-
 		while(!stk.empty()){
 			mpp[stk.top()] = -1;
 			stk.pop();
 		}
-
 		vector<int> finalAnswer;
 		for(int n: nums1){
 			finalAnswer.push_back(mpp[n]);
