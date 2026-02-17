@@ -11,8 +11,6 @@ public:
 	static bool
 	checkKthBitSet(int n,
 				   int k) {
-//		13
-// 1101
 		if (n & (1 << k)) {
 			return true;
 		}
@@ -24,7 +22,9 @@ int main() {
 	Solution obj;
 	bool val = Solution::checkKthBitSet(
 			13, 3);
-	cout<<val;
+	cout << val;
 
 
 }
+
+
