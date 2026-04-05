@@ -75,6 +75,32 @@ public:
 };
 
 
+class Solution {
+public:
+	void solve(int ind,vector<int>cur,  vector<vector<int>> &ans,
+			   vector<int>& nums,int n  ){
+
+		ans.push_back(cur);
+
+
+		for(int i=ind;i<n;i++){
+			if(i>ind && nums[i]==nums[i-1]) continue;
+			cur.push_back(nums[i]);
+			solve(i+1,cur,ans,nums,n);
+			cur.pop_back();
+		}
+	}
+	vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+		int n=nums.size();
+		sort(nums.begin(),nums.end());
+		vector<vector<int>> ans;
+		vector<int>cur;
+		solve(0,cur,ans,nums,n);
+		return ans;
+	}
+};
+
+
 
 // Sort the array to bring duplicates together
 // Required for skipping duplicates efficiently
